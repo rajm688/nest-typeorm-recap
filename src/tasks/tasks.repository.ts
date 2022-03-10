@@ -1,5 +1,6 @@
-import { Tasks } from 'src/entities/tasks.entity';
+import { Tasks, TaskStatus } from 'src/entities/tasks.entity';
 import { EntityRepository, Repository } from 'typeorm';
+import { TaskDto } from './DTO/task.dto';
 @EntityRepository(Tasks)
 export class TaskRepository extends Repository<Tasks> {
   async getTasks(): Promise<TaskDto[]> {
@@ -26,7 +27,7 @@ export class TaskRepository extends Repository<Tasks> {
       await this.createQueryBuilder()
         .insert()
         .into(Tasks)
-        .values({ title, desc, status: TaskStatus.open })
+        .values({ title, desc, status: TaskStatus.active })
         .execute();
       return { mes: 'task created successfully' };
     } catch (error) {
