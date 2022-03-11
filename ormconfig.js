@@ -5,10 +5,10 @@ const _dirConfig = {
   username: 'postgres',
   password: 'raj123',
   database: 'typeorm-demo',
-  entities: ['dist/src/entities/*.js'],
+  entities: ['dist/entities/*.js'],
   migrations: ['dist/migration/*.js'],
   cli: {
-    migrationsDir: 'migration/',
+    migrationsDir: 'migration',
   },
 };
 module.exports = _dirConfig;

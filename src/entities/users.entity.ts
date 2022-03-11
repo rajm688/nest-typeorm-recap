@@ -1,4 +1,11 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Pets } from './pets.entity';
 import { Tasks } from './tasks.entity';
 //   if you are using data mapper approach we need not to  extends base eintity
 //   active Record is a  method where we write our query methods in the model itself where we need to extend the BaseEntity - ❌
@@ -21,4 +28,7 @@ export class User {
 
   @OneToMany(() => Tasks, (tasks) => tasks.users)
   tasks: Tasks[];
+
+  @ManyToMany((type) => Pets, (pets) => pets.users)
+  pets: Pets[];
 }
