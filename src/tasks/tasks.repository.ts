@@ -11,7 +11,7 @@ export class TaskRepository extends Repository<Tasks> {
       throw new Error('something went wrong while getting all tasks');
     }
   }
-  async getTaskById(id: string) {
+  async getTaskById(id: string): Promise<{}> {
     try {
       const task = await this.createQueryBuilder().where({ id }).getOne();
       if (task) {
@@ -21,7 +21,7 @@ export class TaskRepository extends Repository<Tasks> {
       throw new Error('error in getting task by id');
     }
   }
-  async createTask(res: TaskDto) {
+  async createTask(res: TaskDto): Promise<{}> {
     try {
       const { title, desc, status } = res;
       await this.createQueryBuilder()
@@ -34,7 +34,7 @@ export class TaskRepository extends Repository<Tasks> {
       throw new Error('something went wrong while creating a new task');
     }
   }
-  async deleteTask(id: string) {
+  async deleteTask(id: string): Promise<{}> {
     try {
       const result = await this.createQueryBuilder()
         .delete()
@@ -48,7 +48,7 @@ export class TaskRepository extends Repository<Tasks> {
       throw new Error('something went wrong while deleting a task');
     }
   }
-  async updateTask(id: string, status: TaskStatus) {
+  async updateTask(id: string, status: TaskStatus): Promise<{}> {
     try {
       const updatedTask = this.createQueryBuilder()
         .update(Tasks)

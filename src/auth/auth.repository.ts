@@ -1,20 +1,20 @@
 //repository are class decorated with @EntityRepository which extends Repostiory from typeorm and gives the type of the entity the repository tends to
 
 import { EntityRepository, Repository } from 'typeorm';
-import { Auth } from '../entities/auth.entity';
+import { User } from '../entities/users.entity';
 import * as bcrypt from 'bcrypt';
-import { AuthDto } from './dto/auth.dto';
+import { userDto } from './dto/auth.dto';
 import { payloadInterface } from './dto/payload.interface';
-@EntityRepository(Auth) // to denote the repository of the Auth entity
-export class AuthRepository extends Repository<Auth> {
-  async creatingUser(req: AuthDto): Promise<{}> {
+@EntityRepository(User) // to denote the repository of the Auth entity
+export class AuthRepository extends Repository<User> {
+  async creatingUser(req: userDto): Promise<{}> {
     try {
       const { username, password } = req;
       const salt = await bcrypt.genSalt();
       const hashedPassword = await bcrypt.hash(password, salt);
       await this.createQueryBuilder()
         .insert()
-        .into(Auth)
+        .into(User)
         .values({ username, password: hashedPassword })
         .execute();
       return { mes: 'user created successfully' };
@@ -24,7 +24,7 @@ export class AuthRepository extends Repository<Auth> {
       else return { mes: 'error in signup' };
     }
   }
-  async finduser(req: AuthDto, jwtService): Promise<{}> {
+  async finduser(req: userDto, jwtService): Promise<{}> {
     try {
       const { username, password } = req;
       const user = await this.createQueryBuilder().where({ username }).getOne();

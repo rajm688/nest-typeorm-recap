@@ -10,19 +10,19 @@ export class TasksService {
     @InjectRepository(TaskRepository)
     private taskRepository: TaskRepository,
   ) {}
-  getTasks() {
+  getTasks(): Promise<TaskDto[]> {
     return this.taskRepository.getTasks();
   }
-  getTaskById(id: string) {
+  getTaskById(id: string): Promise<{}> {
     return this.taskRepository.getTaskById(id);
   }
-  createTask(res: TaskDto) {
+  createTask(res: TaskDto): Promise<{}> {
     return this.taskRepository.createTask(res);
   }
-  deleteTask(id: string) {
+  deleteTask(id: string): Promise<{}> {
     return this.taskRepository.deleteTask(id);
   }
-  updateTask(id: string, status: TaskStatus) {
+  updateTask(id: string, status: TaskStatus): Promise<{}> {
     return this.taskRepository.updateTask(id, status);
   }
 }
