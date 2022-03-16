@@ -5,7 +5,7 @@ const _dirConfig = {
   username: 'postgres',
   password: 'raj123',
   database: 'typeorm-demo',
-  entities: ['dist/entities/*.js'],
+  entities: ['dist/src/entities/*.js'],
   migrations: ['dist/migration/*.js'],
   cli: {
     migrationsDir: 'migration',
